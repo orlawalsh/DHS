@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Blood Sugar Levels</title>
+	 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="example.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="AddLevelCtrl">
+
+	<div class="header">
+    <div class="top-header">
+      <div class="container">
+        <nav class="navbar nav-tabs navbar-expand-lg">
+          <div class="brand">
+        <img src="img/toolbar_logo.png" ng-style="logoStyle">
+      </div>
+          <!-- <a class="navbar-brand" href="#">Diabetes Helper</a> -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" ng-style="float">
+               <a class="nav-item nav-link" href="#/welcome">Home</a>
+              <a class="nav-item nav-link active" href="#/addLevel">Add Blood Sugar Levels <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="#/shop">Shop</a>
+              <a class="nav-item nav-link" ng-click="logout()" href="#/home">Logout</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+
+      <div class="container" ng-show="success">
+	<div class="row">
+		<div class="alert alert-success">
+			<strong>Success!</strong> Your levels have been recorded successfully.
+		</div>
+	</div>
+</div>
+
+
+ <div class="container" ng-style="mainStyle">
+	<form role="form" name="postForm" ng-submit="createPost()" novalidate="">
+		<div class="col-md-8 col-md-offset-2" >
+		<h2 ng-style="myObj">Please record your levels for today</h2>
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="form-group" ng-class="{'has-error': postForm.dateText.$invalid && postForm.dateText.$touched}">
+					<label for="dateText">Level Date</label>
+					<input type="text" name="dateText" class="form-control" placeholder="Date" ng-model="article.dateText" ng-minlength = "1" required="">
+					<small class="help-block" ng-show="postForm.dateText.$error.minlength && postForm.dateText.$touched">Please enter a valid date</small>
+				</div>
+				<div class="form-group" ng-class="{'has-error': postForm.levelText.$invalid && postForm.levelText.$touched}">
+					<label for="levelText">Level</label>
+					<textarea name="levelText" class="form-control" placeholder="Level" ng-model="article.levelText" ng-minlength = "1" required=""></textarea>
+					<small class="help-block" ng-show="postForm.levelText.$error.minlength && postForm.levelText.$touched">Please enter a valid number.</small>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" ng-style="labelStyle" ng-disabled="postForm.$invalid">Add Levels</button><br>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+
+
+</body>
+</html>

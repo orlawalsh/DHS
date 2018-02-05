@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="example.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+    <script src="paypal-checkout.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  </head>
+
+  <div class="header">
+    <div class="top-header">
+      <div class="container">
+        <nav class="navbar nav-tabs navbar-expand-lg">
+          <div class="brand">
+        <img src="img/toolbar_logo.png" ng-style="logoStyle">
+      </div>
+          <!-- <a class="navbar-brand" href="#">Diabetes Helper</a> -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" ng-style="float">
+              <a class="nav-item nav-link" href="#/main">Welcome</a>
+              <a class="nav-item nav-link" href="#/about">About</a>
+              <a class="nav-item nav-link active" href="#/shop">Shop <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="#/contact">Contact Us</a>
+              <a class="nav-item nav-link" href="#/home"> <span class="glyphicon glyphicon-log-in"></span> Log In</a>
+              <a class="nav-item nav-link" href="#/register"> <span class="glyphicon glyphicon-user"></span> Sign Up </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+    <div class="container" ng-style="mainStyle">
+
+                 <div id="btnContainer">
+        <br>
+<button class="btn" ng-click="changeView()"><i class="fa fa-bars"></i> List</button> 
+<button class="btn active" ng-click="changeView()"><i class="fa fa-th-large"></i> Grid</button>
+ <button class="btn" ng-click="change()">Sort by €</button>
+ <input type="text"  class="btn" placeholder="Search.." ng-model="SearchBox">
+
+
+
+</div>
+<br>
+
+
+        <h4>Free shipping on all items - no minimum spend!</h4>
+        <br>
+
+            <div ng-show="cart.length !== 0">
+          <h1>Shopping Cart</h1>
+          <ul class="list-group">
+            <li class="col-md-6 col-sm-2 well well-sm list-group-item" ng-repeat="c in cart">
+              <h4>{{c.name}} |                <span style="color:blue"> {{c.count}} </span>
+ | {{c.price*c.count | currency :"€"}}</h4>
+              <input class="btn btn-danger" type="button" ng-click="removeItemCart(c)" value="Remove" />
+            </li>
+          </ul>
+
+          <h3>Total : {{total | currency :"€"}}</h3>
+          <div>
+  <style>.paypal-button-widget { display: none !important; }</style>
+  <div id="t1">
+    <a href ng-click="initPaypal()"
+     >
+      <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="PayPal">
+    </a>
+  </div>
+</div>
+        </div>
+
+<div ng-repeat="product in products | orderBy:sort | filter:SearchBox" class="details">
+  <ul class="list-group text-center">
+          <li class="col-md-6 col-sm-2 well well-sm list-group-item details">
+          <figure>
+              <img width="150" height="150" ng-src="{{product.image}}" />
+              <figcaption>
+                  <h3>{{product.name}}</h3>
+                  <p>{{product.des}}</p>
+                                  <h4>{{product.price | currency :"€"}}</h4>
+              </figcaption>
+            </figure>
+            <input class="btn btn-success" type="button" ng-click="addItemToCart(product)" value="Add to Cart" />
+          </li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
